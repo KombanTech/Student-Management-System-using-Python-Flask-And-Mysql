@@ -1,0 +1,122 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.container {
+    margin-top: 50px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ######################################################################################################### */
+/* @app.route('/grades', methods=['GET', 'POST'])
+def grades():
+    if 'user_id' not in session:
+        return redirect(url_for('student_view'))  # Redirect to login or view page if not logged in
+
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    if request.method == 'POST':
+        student_id = session['user_id']  # Get logged-in student's ID
+        course_id = request.form.get('course_id')
+        grade = request.form.get('grade')
+
+        try:
+            cursor.execute(
+                "INSERT INTO grades (student_id, course_id, grade) VALUES (%s, %s, %s)",
+                (student_id, course_id, grade)
+            )
+            conn.commit()
+            flash('Grade added successfully!', 'success')
+        except mysql.connector.Error as e:
+            flash(f'Error adding grade: {e}', 'danger')
+        finally:
+            cursor.close()
+            conn.close()
+            return redirect(url_for('grades'))  # Redirect after POST to avoid resubmission
+
+    # Fetch students and courses for dropdowns
+    try:
+        cursor.execute("SELECT * FROM stu_users")  # Updated table name
+        students = cursor.fetchall()
+        cursor.execute("SELECT * FROM courses")
+        courses = cursor.fetchall()
+    except mysql.connector.Error as e:
+        flash(f'Error fetching data: {e}', 'danger')
+    finally:
+        cursor.close()
+        conn.close()
+
+    return render_template('grades.html', students=students, courses=courses)
+
+
+
+
+
+@app.route('/stu_grades', methods=['GET'])
+def stu_grades():
+    if 'user_id' not in session:
+        return redirect(url_for('student_view'))
+
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    try:
+        # Updated query to include student name and grades
+        cursor.execute("""
+            SELECT g.*, c.course_name, s.name AS student_name
+            FROM grades g
+            JOIN courses c ON g.course_id = c.id
+            JOIN stu_users s ON g.student_id = s.id
+            WHERE g.student_id = %s
+        """, (session['user_id'],))
+        
+        grades_list = cursor.fetchall()  # Fetch the grades
+
+        if not grades_list:
+            flash('No grades found for this student.', 'info')
+
+    except mysql.connector.Error as e:
+        flash(f'Error fetching grades: {e}', 'danger')
+        grades_list = []
+    finally:
+        cursor.close()
+        conn.close()
+
+    return render_template('stu_grades.html', grades=grades_list, student_name=grades_list[0]['student_name'] if grades_list else 'Student')
+
+
+
+@app.route('/student_profile/<int:student_id>')
+def stu_profile(student_id):
+    if 'user_id' not in session:
+        return redirect(url_for('student_view'))
+    
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    
+    cursor.execute("SELECT * FROM stu_users WHERE id = %s", (student_id,))
+    student = cursor.fetchone()
+    
+    cursor.close()
+    conn.close()
+    
+    return render_template('stu_profile.html', student=student) */
+
+
+
+/* ########################################################################################################## */

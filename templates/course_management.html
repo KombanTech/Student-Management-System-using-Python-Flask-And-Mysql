@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Course Management</title>
+    <style>
+        body {
+            background-color: #f8f9fa; /* Light background color */
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+        }
+        .gradient-text {
+            background: linear-gradient(#4cae4c, #00e500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 3rem; /* Increased font size */
+            font-weight: bold;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #007bff; /* Bootstrap primary color */
+        }
+        .form-control {
+            border-radius: 5px;
+        }
+        .btn-success {
+            border: none;
+            transition: background-color 0.3s;
+        }
+        .btn-danger {
+            border-radius: 5px;
+        }
+        /* Responsive adjustments */
+        @media (max-width: 576px) {
+            .container {
+                padding: 20px; /* Reduced padding for small screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow p-3 mb-5 bg-white rounded">
+        <a class="navbar-brand" href="#">Student Management System</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/dashboard">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('student_list') }}">View Students</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('view_assignments') }}">View Assignment</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('course_management') }}">Manage Courses</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('attendance') }}">Mark Attendance</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('grades') }}">Manage Grades</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('profile') }}">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-danger text-white" href="{{ url_for('logout') }}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2 class="gradient-text">Course Management</h2>
+        <form method="post" class="mb-3">
+            <div class="form-group">
+                <label for="course_name">Course Name</label>
+                <input type="text" class="form-control" id="course_name" name="course_name" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-success">Add Course</button>
+        </form>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Course ID</th>
+                    <th>Course Name</th>
+                    <th>Description</th>
+                    <!-- <th>Actions</th> -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for course in courses %}
+                <tr>
+                    <td>{{ course.id }}</td>
+                    <td>{{ course.course_name }}</td>
+                    <td>{{ course.description }}</td>
+                    <td>
+                        <!-- <form action="{{ url_for('delete_course', course_id=course.id) }}" method="POST" style="display:inline;">
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form> -->
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

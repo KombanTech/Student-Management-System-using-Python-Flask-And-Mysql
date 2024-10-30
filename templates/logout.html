@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Logout</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Logout Confirmation</h2>
+        <p>Are you sure you want to log out?</p>
+        <a href="{{ url_for('login') }}" class="btn btn-danger">Logout</a>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Cancel</a>
+    </div>
+</body>
+</html>

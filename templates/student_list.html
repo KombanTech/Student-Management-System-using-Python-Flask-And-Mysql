@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Student List</title>
+    <style>
+        body {
+            background-color: #f8f9fa; /* Light background */
+            font-family: Arial, sans-serif;
+        }
+        .container-fluid {
+            margin-top: 50px;
+            padding: 30px;
+            border-radius: 8px;
+            /* box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); */
+        }
+        .gradient-text {
+            background: linear-gradient(#4cae4c, #00e500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 3rem; /* Increased font size */
+            font-weight: bold;
+        }
+        .table th {
+            background-color: #4cae4c; /* Bootstrap primary color */
+            color: white;
+        }
+        .table td {
+            vertical-align: middle; /* Centering content in table cells */
+        }
+        .btn {
+            margin: 0 5px; /* Spacing between buttons */
+        }
+        @media (max-width: 768px) {
+            .gradient-text {
+                font-size: 1.8rem; /* Smaller font size for mobile */
+            }
+            .container {
+                padding: 20px; /* Reduced padding */
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow p-3 mb-5 bg-white rounded">
+        <a class="navbar-brand" href="#">Student Management System</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/dashboard">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('student_list') }}">View Students</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('view_assignments') }}">View Assignment</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('course_management') }}">Manage Courses</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('attendance') }}">Mark Attendance</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('grades') }}">Manage Grades</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('profile') }}">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-danger text-white" href="{{ url_for('logout') }}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <h2 class="gradient-text">Student Information</h2>
+        <a href="{{ url_for('add_student') }}" class="btn btn-success">Add Student</a>
+        <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    <th>Student ID</th>
+                    <th>Name</th>
+                    <th>Department</th>
+                    <th>Registration Number</th>
+                    <th>Phone</th>
+                    <th>Gender</th>
+                    <th>Blood Group</th>
+                    <th>Email</th>
+                    <th>DOB</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in students %}
+                <tr>
+                    <td>{{ student.id }}</td>
+                    <td>{{ student.name }}</td>
+                    <td>{{ student.department }}</td>
+                    <td>{{ student.registration_number }}</td>
+                    <td>{{ student.phone }}</td>
+                    <td>{{ student.gender }}</td>
+                    <td>{{ student.blood_group }}</td>
+                    <td>{{ student.email }}</td>
+                    <td>{{ student.dob }}</td>
+                    <td>
+                        <a href="{{ url_for('edit_student', student_id=student.id) }}" class="btn btn-warning btn-sm">Edit</a>
+                        <form action="{{ url_for('delete_student', student_id=student.id) }}" method="POST" style="display:inline;">
+                            <!-- <button type="submit" class="btn btn-danger btn-sm">Delete</button> -->
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

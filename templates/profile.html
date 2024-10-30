@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Light background */
+            color: #333; /* Text color */
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            max-width: 450px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5rem; /* Increased font size */
+            color: #0056b3; /* Custom color */
+        }
+        .profile-info {
+            margin-bottom: 20px;
+        }
+        .profile-info div {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-left: 4px solid #0056b3; /* Accent border */
+            background: #f1f8ff; /* Light background for each info block */
+        }
+        .profile-info strong {
+            color: #0056b3; /* Highlighted labels */
+        }
+        .logout-link {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+        }
+        .btn-danger {
+            background-color: #dc3545; /* Custom red color */
+            border: none;
+        }
+        .btn-danger:hover {
+            background-color: #c82333; /* Darker shade on hover */
+        }
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem; /* Smaller font size for mobile */
+            }
+            .container {
+                padding: 20px; /* Reduced padding */
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow p-3 mb-5 bg-white rounded">
+        <a class="navbar-brand" href="#">Student Management System</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/dashboard">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('student_list') }}">View Students</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('view_assignments') }}">View Assignment</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('course_management') }}">Manage Courses</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('attendance') }}">Mark Attendance</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('grades') }}">Manage Grades</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('profile') }}">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-danger text-white" href="{{ url_for('logout') }}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Profile of {{ user['name'] }}</h1>
+        <div class="profile-info">
+            <div>
+                <strong>Email:</strong> {{ user['email'] }}
+            </div>
+            <div>
+                <strong>Phone:</strong> {{ user['phone'] }}
+            </div>
+            <div>
+                <strong>Staff id:</strong> {{ user['registration_number'] }}
+            </div>
+            <div>
+                <strong>Gender:</strong> {{ user['gender'] }}
+            </div>
+            <div>
+                <strong>DOB:</strong> {{ user['dob'] }}
+            </div>
+            <div>
+                <strong>Qualification:</strong> {{ user['department'] }}
+            </div>
+            <div>
+                <strong>Blood Group:</strong> {{ user['blood_group'] }}
+            </div>
+            <div>
+                <strong>Address:</strong> {{ user['address'] }}
+            </div>
+        </div>
+        <a class="btn btn-danger logout-link" href="{{ url_for('logout') }}">Logout</a>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
